@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mdeveloper.diegoalves.cars.fragments.CarFragment;
+import com.mdeveloper.diegoalves.cars.fragments.CarsTabFragment;
 import com.mdeveloper.diegoalves.cars.fragments.SiteFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        replaceFragment(new CarsTabFragment());
     }
 
     @Override
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.cars) {
-            replaceFragment(new CarFragment());
+            replaceFragment(new CarsTabFragment());
         } else if (id == R.id.nav_site) {
             replaceFragment(new SiteFragment());
         } else if (id == R.id.nav_manage) {

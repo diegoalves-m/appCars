@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class CarService {
 
-    public static List<Car> getCars(Context context) {
+    public static List<Car> getCars(Context context, String type) {
         List<Car> cars = new ArrayList<>();
 
         for(int i = 0; i < 20; i++) {
             Car c = new Car();
-            c.name = "Car "+ i;
+            c.name = "Car "+ type + ": " + i;
             c.desc = "Desc "+ i;
             c.urlPhoto = "http://res.cloudinary.com/sayaryx/image/upload/v1464700468/carro_i6ghan.png";
             cars.add(c);

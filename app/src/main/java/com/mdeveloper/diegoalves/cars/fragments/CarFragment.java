@@ -26,12 +26,18 @@ public class CarFragment extends Fragment {
     protected RecyclerView recyclerView;
     private List<Car> mCars;
     private LinearLayoutManager mLayoutManager;
+    private String type;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_cars, container, false);
+
+        if(getArguments() != null) {
+            this.type = getArguments().getString("type");
+        }
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -48,8 +54,7 @@ public class CarFragment extends Fragment {
     }
 
     private void taskCars() {
-        this.mCars = CarService.getCars(getContext());
-        Log.i("Cars", mCars.toString());
+        this.mCars = CarService.getCars(getContext(), type);
         recyclerView.setAdapter(new CarAdapter(mCars, getContext(), onClickCar()));
     }
 
