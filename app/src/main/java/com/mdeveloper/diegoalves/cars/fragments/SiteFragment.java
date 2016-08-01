@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,9 @@ public class SiteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_site, container, false);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Site");
+
         webView = (WebView) view.findViewById(R.id.webView);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         setWebViewClient(webView);

@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import com.mdeveloper.diegoalves.cars.R;
-import com.mdeveloper.diegoalves.cars.fragments.CarFragment;
+import com.mdeveloper.diegoalves.cars.fragments.ListCarFragment;
 
 /**
  * Created by Diego Alves on 01/06/2016.
@@ -26,13 +27,16 @@ public class TabsAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Bundle args = new Bundle();
         if(position == 0) {
-            args.putString("type", "classics");
+            args.putString("type", "classicos");
+            Log.i("tab", "num"+ position);
         } else if(position == 1) {
-            args.putString("type", "sports");
+            args.putString("type", "esportivos");
+            Log.i("tab", "num"+ position);
         } else {
-            args.putString("type", "lux");
+            args.putString("type", "luxo");
+            Log.i("tab", "num"+ position);
         }
-        Fragment f = new CarFragment();
+        Fragment f = new ListCarFragment();
         f.setArguments(args);
         return f;
     }

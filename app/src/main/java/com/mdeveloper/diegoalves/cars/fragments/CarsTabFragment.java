@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class CarsTabFragment extends Fragment implements TabLayout.OnTabSelected
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_tab_cars, container, false);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Carros");
 
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mViewPager.setOffscreenPageLimit(2);
