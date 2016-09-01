@@ -5,10 +5,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +31,7 @@ public class ListCarFragment extends Fragment {
     private List<Car> mCars;
     private LinearLayoutManager mLayoutManager;
     private String type;
+    private SwipeRefreshLayout refreshLayout;
 
     @Nullable
     @Override
@@ -42,6 +43,9 @@ public class ListCarFragment extends Fragment {
             this.type = getArguments().getString("type");
         }
 
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeToRefresh);
+        refreshLayout.setOnRefreshListener(OnRefreshListener());
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -49,6 +53,15 @@ public class ListCarFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         return view;
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
+        return new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                taskCars();
+            }
+        };
     }
 
     @Override
@@ -90,6 +103,7 @@ public class ListCarFragment extends Fragment {
         protected void onPostExecute(List<Car> cars) {
             if (cars != null) {
                 ListCarFragment.this.mCars = cars;
+                refreshLayout.setRefreshing(false);
                 recyclerView.setAdapter(new CarAdapter(cars, getContext(), onClickCar()));
             }
         }
