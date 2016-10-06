@@ -12,12 +12,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mdeveloper.diegoalves.cars.R;
 import com.mdeveloper.diegoalves.cars.activities.CarActivity;
 import com.mdeveloper.diegoalves.cars.adapter.CarAdapter;
 import com.mdeveloper.diegoalves.cars.domain.Car;
 import com.mdeveloper.diegoalves.cars.domain.CarService;
+import com.mdeveloper.diegoalves.cars.util.Connection;
 
 import java.io.IOException;
 import java.util.List;
@@ -59,7 +61,13 @@ public class ListCarFragment extends Fragment {
         return new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                taskCars();
+                if(Connection.isNetworkAvailable(getContext())) {
+                    taskCars();
+                } else {
+                    Toast.makeText(getContext(), "Sem conexão", Toast.LENGTH_SHORT).show();
+                    refreshLayout.setRefreshing(false);
+                }
+
             }
         };
     }
@@ -67,7 +75,7 @@ public class ListCarFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        taskCars();
+        //taskCars();
 
     }
 

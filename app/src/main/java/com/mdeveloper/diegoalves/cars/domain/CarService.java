@@ -34,8 +34,7 @@ public class CarService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        
         List<Car> cars = parseJson(context, json);
         return cars;
     }

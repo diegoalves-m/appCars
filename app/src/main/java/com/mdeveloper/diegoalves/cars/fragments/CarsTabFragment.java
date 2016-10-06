@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.mdeveloper.diegoalves.cars.R;
 import com.mdeveloper.diegoalves.cars.adapter.TabsAdapter;
+import com.mdeveloper.diegoalves.cars.util.Prefs;
 
 /**
  * Created by Diego Alves on 01/06/2016.
@@ -46,6 +47,8 @@ public class CarsTabFragment extends Fragment implements TabLayout.OnTabSelected
         mTabLayout.setOnTabSelectedListener(this);
         // handler update tab selected
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        int tabIndex = Prefs.getInteger(getContext(), "tabIndex");
+        mViewPager.setCurrentItem(tabIndex);
 
         return view;
     }
@@ -54,6 +57,8 @@ public class CarsTabFragment extends Fragment implements TabLayout.OnTabSelected
     public void onTabSelected(TabLayout.Tab tab) {
         // alter tab update viewPager
         mViewPager.setCurrentItem(tab.getPosition());
+        // save index
+        Prefs.setInteger(getContext(), "tabIndex", mViewPager.getCurrentItem());
     }
 
     @Override
